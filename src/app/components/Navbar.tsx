@@ -29,12 +29,12 @@ export default function Navbar() {
           height={32}
         />
         <div
-          className="flex items-center space-x-2 cursor-pointer"
+          className="flex items-center space-x-4 cursor-pointer"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
           <div className="text-[1rem] font-medium">
             <div>Nethmal Gunewardana</div>
-            <div className="text-xs text-gray-400">Team Owner</div>
+            <div className="text-[12px] text-gray-400">Current Rank: -</div>
           </div>
           <div className="w-4 h-4 flex-shrink-0">
             <ChevronDownIcon

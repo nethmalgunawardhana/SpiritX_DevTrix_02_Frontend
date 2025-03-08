@@ -64,7 +64,7 @@ export default function Sidebar() {
           <MenuItem icon={<QuestionMarkCircleIcon className="h-5 w-5" />} label="Help Center" />
         </div>
 
-        <button className="ml-2 w-56 text-md font-semibold text-zinc-900 bg-teal-100 p-1 rounded-md px-4 mt-10">Avl Balance: <br/>Rs. 9,000,000</button>
+        <button className="ml-2 w-56 text-md font-semibold text-zinc-900 bg-teal-100 rounded-md px-4 mt-10 py-2">Avilable Balance <br/>Rs. 9,000,000</button>
       </nav>
     </div>
   );
