@@ -45,7 +45,7 @@ export default function Sidebar() {
             height={32}
           />
         </div>
-        <span className="font-medium text-[1rem]">Spirit11 Fantasy</span>
+        <span className="font-medium text-[1.1rem]">Spirit11 Fantasy</span>
       </div>
 
       <nav className="pt-4 px-2 flex-1">
@@ -63,6 +63,8 @@ export default function Sidebar() {
           <MenuItem icon={<CogIcon className="h-5 w-5" />} label="Settings" />
           <MenuItem icon={<QuestionMarkCircleIcon className="h-5 w-5" />} label="Help Center" />
         </div>
+
+        <button className="ml-2 w-56 text-md font-semibold text-zinc-900 bg-teal-100 p-1 rounded-md px-4 mt-10">Avl Balance: <br/>Rs. 9,000,000</button>
       </nav>
     </div>
   );
