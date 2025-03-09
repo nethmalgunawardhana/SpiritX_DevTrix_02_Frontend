@@ -17,6 +17,7 @@ interface PlayerData {
   name: string;
   category: string;
   activeStatus?: boolean;
+  university:string;
 }
 
 interface Player {
@@ -65,7 +66,8 @@ const PlayerForm: React.FC = () => {
           const players = results.data.map((row:any) => {
             return {
               playerData: {
-                name: row.Name || '', // Changed from row.name to row.Name
+                name: row.Name || '', 
+                university: row.University || '',
                 category: row.Category || '', 
                 activeStatus: true
               },
@@ -75,7 +77,7 @@ const PlayerForm: React.FC = () => {
                 ballsFaced: parseInt(row['Balls Faced'] || '0'),
                 inningsPlayed: parseInt(row['Innings Played'] || '0'), 
                 oversBowled: parseFloat(row['Overs Bowled'] || '0'), 
-                runsConceded: parseInt(row['Runs Conceded'] || '0') 
+                runsConceded: parseInt(row['Runs Conceded'] || '0')
               }
             };
           });
@@ -137,6 +139,7 @@ const PlayerForm: React.FC = () => {
     const playerData: PlayerData = {
       name,
       category,
+      university,
       activeStatus: true
     };
     
