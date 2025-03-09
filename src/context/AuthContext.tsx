@@ -39,10 +39,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const fetchUserRole = async (username: string) => {
     try {
       const userDoc = await getDoc(doc(db, "users", username));
-      console.log("userDoc for ",username , userDoc);
-      const firestoreUser = userDoc.data() as IUser;
+      const firestoreUser = await userDoc.data() as IUser;
       if (  firestoreUser.username === username) {
-        console.log("user exists",userDoc.data());
         const role = userDoc.data()?.role;
         setRole(role);
         localStorage.setItem("role", role);
@@ -62,12 +60,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (currentUser) {
         // Check localStorage first to avoid unnecessary Firestore calls
-        console.log("currentUser",currentUser);
         const storedRole = localStorage.getItem("role");
         if (storedRole) {
           setRole(storedRole);
         } else {
             const username = currentUser.email?.split("@")[0] as string;
+            console.log(currentUser.email);
           await fetchUserRole(username);
         }
       } else {
@@ -80,10 +78,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const register = async (email: string, password: string, username: string) => {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const userCredential = await createUserWithEmailAndPassword(auth, username+"@spiritx.com", password);
     const user = userCredential.user;
 
-    await setDoc(doc(db, "users", user.uid), {
+    await setDoc(doc(db, "users", username), {
       uid: user.uid,
       email,
       username,
@@ -96,8 +94,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     router.push("/dashboard");
   };
 
-  const login = async (email: string, password: string) => {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  const login = async (username: string, password: string) => {
+    console.log("login with ",username);
+    const userCredential = await signInWithEmailAndPassword(auth, username, password);
     const user = userCredential.user;
     await fetchUserRole(user.uid);
 

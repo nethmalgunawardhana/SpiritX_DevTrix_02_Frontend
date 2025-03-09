@@ -4,6 +4,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Leaderboard from '../components/Leaderboard';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 const users = [
   { rank: 1, username: 'Alice', points: 1500, avatarUrl: '/Images/avatar.jpeg' },
@@ -22,6 +23,7 @@ const currentUser = 'Charlie';
 
 const LeaderboardPage: React.FC = () => {
   return (
+    <ProtectedRoute availableFor={['team_owner','admin' , 'user']} >
     <div className="flex h-screen">
       <Sidebar />
       <div className="flex-1 flex flex-col">
@@ -31,6 +33,7 @@ const LeaderboardPage: React.FC = () => {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 };
 

@@ -1,9 +1,11 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 const Dashboard: React.FC = () => {
     return (
+        <ProtectedRoute availableFor={['team_owner','user']} >
         <div className="flex h-screen">
             <Sidebar />
             <div className="flex-1 flex flex-col">
@@ -13,6 +15,7 @@ const Dashboard: React.FC = () => {
                 </main>
             </div>
         </div>
+        </ProtectedRoute>
     );
 };
 

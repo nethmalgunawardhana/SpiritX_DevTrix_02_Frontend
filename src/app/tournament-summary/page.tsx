@@ -1,9 +1,11 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 const TournamentSummary: React.FC = () => {
     return (
+        <ProtectedRoute availableFor={['team_owner','admin','user']} >
         <div className="flex h-screen">
             <Sidebar />
             <div className="flex-1 flex flex-col">
@@ -13,6 +15,7 @@ const TournamentSummary: React.FC = () => {
                 </main>
             </div>
         </div>
+        </ProtectedRoute>
     );
 };
 

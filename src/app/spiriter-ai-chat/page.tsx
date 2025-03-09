@@ -5,9 +5,11 @@ import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import ChatBot from '../components/ChatBot';
 import { Shell } from 'lucide-react';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 const ChatPage: React.FC = () => {
   return (
+    <ProtectedRoute availableFor={['team_owner','admin','user']} >
     <div className="flex h-screen">
       <Sidebar />
       <div className="flex-1">
@@ -23,6 +25,7 @@ const ChatPage: React.FC = () => {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 };
 

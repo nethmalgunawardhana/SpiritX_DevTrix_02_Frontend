@@ -5,7 +5,7 @@ import ProtectedRoute from '../components/ProtectedRoute';
 
 const AddPlayer: React.FC = () => {
     return (
-        <ProtectedRoute>
+        <ProtectedRoute availableFor={['team_owner','admin']} >
         <div className="flex h-screen">
             <Sidebar />
             <div className="flex-1 flex flex-col">
