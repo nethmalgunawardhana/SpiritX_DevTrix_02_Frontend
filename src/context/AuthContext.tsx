@@ -27,13 +27,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [role, setRole] = useState<string | null>(null);
   const router = useRouter();
 
+  interface IUser {
+    uid: string;
+    email: string;
+    username: string;
+    role: string;
+    budgetRemaining: number;
+    };
+
   // Function to fetch user role from Firestore
-  const fetchUserRole = async (uid: string) => {
+  const fetchUserRole = async (username: string) => {
     try {
-      const userDoc = await getDoc(doc(db, "users", uid));
-      if (userDoc.exists()) {
-        setRole(userDoc.data().role);
-        localStorage.setItem("role", userDoc.data().role); // Persist role in localStorage
+      const userDoc = await getDoc(doc(db, "users", username));
+      const firestoreUser = await userDoc.data() as IUser;
+      if (  firestoreUser.username === username) {
+        const role = userDoc.data()?.role;
+        setRole(role);
+        localStorage.setItem("role", role);
+        console.log("Role set from Firestore:", role);
+      }
+      else{
+        console.log("user does not exist");
       }
     } catch (error) {
       console.error("Error fetching role:", error);
@@ -50,7 +64,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (storedRole) {
           setRole(storedRole);
         } else {
-          await fetchUserRole(currentUser.uid);
+            const username = currentUser.email?.split("@")[0] as string;
+            console.log(currentUser.email);
+          await fetchUserRole(username);
         }
       } else {
         setRole(null);
@@ -62,10 +78,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const register = async (email: string, password: string, username: string) => {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const userCredential = await createUserWithEmailAndPassword(auth, username+"@spiritx.com", password);
     const user = userCredential.user;
 
-    await setDoc(doc(db, "users", user.uid), {
+    await setDoc(doc(db, "users", username), {
       uid: user.uid,
       email,
       username,
@@ -78,10 +94,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     router.push("/dashboard");
   };
 
-  const login = async (email: string, password: string) => {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  const login = async (username: string, password: string) => {
+    console.log("login with ",username);
+    const userCredential = await signInWithEmailAndPassword(auth, username, password);
     const user = userCredential.user;
-    await fetchUserRole(user.uid); // Fetch role from Firestore
+    await fetchUserRole(user.uid);
 
     router.push("/dashboard");
   };
@@ -90,7 +107,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     await signOut(auth);
     setUser(null);
     setRole(null);
-    localStorage.removeItem("role"); // Clear role on logout
+    localStorage.removeItem("role");
     router.push("/login");
   };
 

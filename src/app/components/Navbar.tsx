@@ -3,12 +3,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Img from "next/image";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [username, setUsername] = useState("");
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   // const role: "admin" | "user" = "admin";
   const role: "admin" | "user" = "user" as "admin" | "user";
+  const auth = useAuth();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -18,7 +22,16 @@ export default function Navbar() {
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+
   }, []);
+
+
+
+  const handleLogout = () => {
+    console.log("Logging out");
+    auth?.logout();
+    setUsername(auth?.user?.email || "name");
+  };
 
   return (
     <header className="h-18 border-b border-zinc-800 flex px-6 justify-end">
@@ -35,7 +48,7 @@ export default function Navbar() {
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
           <div className="text-[1rem] font-medium">
-            <div>Nethmal Gunewardana</div>
+            <div>{username}</div>
             {role === "admin" ? 
               <div className="text-[12px] text-gray-400">System Admin</div> :
             <div className="text-[12px] text-gray-400">Current Rank: -</div>
@@ -49,11 +62,18 @@ export default function Navbar() {
           </div>
         </div>
 
+        <button 
+          onClick={handleLogout} 
+          className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
+        >
+          Logout
+        </button>
+
         {dropdownOpen && (
           <div className="absolute right-0 top-full mt-2 w-48 bg-zinc-900 border border-zinc-700 rounded-md shadow-lg z-50">
             <ul className="py-2 text-sm text-gray-200">
               <li className="px-4 py-2 hover:bg-zinc-700 cursor-pointer">Profile</li>
-              <li className="px-4 py-2 hover:bg-red-900 text-red-400 cursor-pointer">Logout</li>
+              <li className="px-4 py-2 hover:bg-red-900 text-red-400 cursor-pointer" >Logout</li>
             </ul>
           </div>
         )}
