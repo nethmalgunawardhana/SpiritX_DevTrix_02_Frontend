@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuth } from '@/context/AuthContext';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const DashboardPage: React.FC = () => {
 
