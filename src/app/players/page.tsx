@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
 import TableView from '../components/TableView';
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC = () => { 
     return (
         <div className="flex h-screen">
             <Sidebar />

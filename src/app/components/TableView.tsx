@@ -2,9 +2,12 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Table from './Table';
+import { db } from '../../lib/firebase';
+import { collection, onSnapshot } from 'firebase/firestore';
 
-export default function PlayersPage() {
-  const players = [
+export default function   PlayersPage() {
+
+  /*
     {
       id: '1',
       name: 'Michael Jordan',
@@ -12,35 +15,29 @@ export default function PlayersPage() {
       university: 'University of North Carolina',
       price: '$15,000,000',
     },
-    {
-      id: '2',
-      name: 'LeBron James',
-      avatarUrl: '/Images/avatar.jpeg',
-      university: 'St. Vincent-St. Mary High School',
-      price: '$45,000,000',
-    },
-    {
-      id: '3',
-      name: 'Stephen Curry',
-      avatarUrl: '/Images/avatar.jpeg',
-      university: 'Davidson College',
-      price: '$48,000,000',
-    },
-    {
-      id: '4',
-      name: 'Kevin Durant',
-      avatarUrl: '/Images/avatar.jpeg',
-      university: 'University of Texas',
-      price: '$42,000,000',
-    },
-    {
-      id: '5',
-      name: 'Giannis Antetokounmpo',
-      avatarUrl: '/Images/avatar.jpeg',
-      university: 'Filathlitikos (Greece)',
-      price: '$39,000,000',
-    },
-  ];
+
+  */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+  const [players, setPlayers] = useState<any[]>([]);
+  // const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const playersCollection = collection(db, "players");
+
+    const unsubscribe = onSnapshot(playersCollection, (snapshot) => {
+      const updatedPlayers = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        avatarUrl: doc.data().avatarUrl,
+        name: doc.data().name,
+        university: doc.data().university,
+        price: doc.data().basePrice,
+      }));
+      console.log("Updated players:", updatedPlayers);
+      setPlayers(updatedPlayers);
+    });
+
+    return () => unsubscribe(); // Cleanup on unmount
+}, []);
 
   const [menuState, setMenuState] = useState({
     visible: false,
@@ -50,7 +47,7 @@ export default function PlayersPage() {
   });
 
   const [currentPage, setCurrentPage] = useState(1);
-  const playersPerPage = 2;
+  const playersPerPage = 10;
   const indexOfLastPlayer = currentPage * playersPerPage;
   const indexOfFirstPlayer = indexOfLastPlayer - playersPerPage;
   const currentPlayers = players.slice(indexOfFirstPlayer, indexOfLastPlayer);
