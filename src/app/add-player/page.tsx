@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
+import PlayerForm from '../components/PlayerForm';
 
 const AddPlayer: React.FC = () => {
     return (
@@ -10,6 +11,7 @@ const AddPlayer: React.FC = () => {
                 <Navbar />
                 <main className="flex-1 p-6">
                     <h1 className="text-2xl text-white mb-4">Add Player</h1>
+                    <PlayerForm />
                 </main>
             </div>
         </div>
