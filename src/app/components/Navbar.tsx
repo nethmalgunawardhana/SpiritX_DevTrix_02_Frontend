@@ -7,6 +7,8 @@ import Img from "next/image";
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  // const role: "admin" | "user" = "admin";
+  const role: "admin" | "user" = "user" as "admin" | "user";
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -34,7 +36,10 @@ export default function Navbar() {
         >
           <div className="text-[1rem] font-medium">
             <div>Nethmal Gunewardana</div>
+            {role === "admin" ? 
+              <div className="text-[12px] text-gray-400">System Admin</div> :
             <div className="text-[12px] text-gray-400">Current Rank: -</div>
+            } 
           </div>
           <div className="relative">
             <ChevronDownIcon
