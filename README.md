@@ -2,12 +2,11 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-# Firebase config
+### Firebase config
 - Create a Firebase project in the [Firebase Console](https://console.firebase.google.com/).
 - Create a copy of the `.env.example` file and rename it to `.env`. Fill in the values with your Firebase project's configuration.
 
-```bash
-
+### Running frontend
 First, run the development server:
 
 ```bash
