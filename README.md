@@ -34,6 +34,8 @@ GET http://localhost:5000/chatbot/query/?query=who is player nuwan?
 
 Make sure the chatbot backend is running on port **5000**.
 
+Chatbot repository: [Spiritor AI Chat](https://github.com/nethmalgunawardhana/spiriter-ai-chat)
+
 ## Project Structure
 - `pages/` - Contains the Next.js pages.
 - `components/` - Reusable React components.
