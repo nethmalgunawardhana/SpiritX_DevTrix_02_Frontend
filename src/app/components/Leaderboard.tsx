@@ -80,11 +80,6 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ users, currentUser }) => {
                 height={40}
                 className="rounded-full border-2 border-zinc-200 dark:border-zinc-700"
               />
-              {/* {user.rank <= 3 && (
-                <div className={`absolute -top-1 -right-1 w-4 h-4 rounded-full ${
-                  user.rank === 1 ? 'bg-yellow-400' : user.rank === 2 ? 'bg-zinc-400' : 'bg-amber-600'
-                } border border-white dark:border-zinc-800`}></div>
-              )} */}
             </div>
             
             <div className="ml-4 flex-1">
