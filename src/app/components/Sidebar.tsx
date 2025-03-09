@@ -6,12 +6,12 @@ import { usePathname } from 'next/navigation';
 import { 
     UserGroupIcon,
     TrophyIcon,
-    SparklesIcon,
     CogIcon,
     QuestionMarkCircleIcon,
     PlusCircleIcon,
     PresentationChartBarIcon
 } from '@heroicons/react/24/outline';
+import { Shell } from 'lucide-react';
 import Img from 'next/image';
 
 interface MenuItemProps {
@@ -43,7 +43,7 @@ export default function Sidebar() {
 
   return (
     <div className="w-64 border-r border-zinc-800 flex flex-col">
-      <div className="p-4 flex items-center space-x-2 border-b border-zinc-800">
+      <div className="p-3 flex items-center space-x-2 border-b border-zinc-800">
         <div className="h-12 w-12 rounded-full flex items-center justify-center gap-2">
           <Img 
             src="/spirit11-logo.png" 
@@ -61,7 +61,7 @@ export default function Sidebar() {
           <MenuItem icon={<UserGroupIcon className="h-5 w-5" />} label="Players" isActive={currentPath === '/players'} notification={undefined} url='/players'/>
           <MenuItem icon={<PlusCircleIcon className="h-5 w-5" />} label="Create Team" isActive={currentPath === '/create-team'} notification={undefined} url='/create-team'/>
           <MenuItem icon={<TrophyIcon className="h-5 w-5" />} label="Leaderboard" isActive={currentPath === '/leaderboard'} notification={undefined} url='/leaderboard'/>
-          <MenuItem icon={<SparklesIcon className="h-5 w-5" />} label="Spiriter AI Chat" isActive={currentPath === '/spiriter-ai-chat'} notification={undefined} url='/spiriter-ai-chat'/>
+          <MenuItem icon={<Shell className="h-5 w-5" />} label="Spiriter AI Chat" isActive={currentPath === '/spiriter-ai-chat'} notification={undefined} url='/spiriter-ai-chat'/>
         </div>
 
         <hr className="my-4 border-t border-zinc-800" />
