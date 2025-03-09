@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "lucide-react": "^0.479.0",
     "my-next-app": "file:",
     "next": "15.2.1",
     "react": "^19.0.0",
