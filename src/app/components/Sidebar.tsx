@@ -43,8 +43,8 @@ const MenuItem: React.FC<MenuItemProps> = ({ url, icon, label, notification, isA
 
 export default function Sidebar() {
   const currentPath = usePathname();
-  // const role = 'admin' as 'admin' | 'user';
-  const role = 'user' as 'admin' | 'user';
+  const role = 'admin' as 'admin' | 'user';
+  // const role = 'user' as 'admin' | 'user';
 
   return (
     <div className="w-64 border-r border-zinc-800 flex flex-col">
@@ -67,7 +67,7 @@ export default function Sidebar() {
               <MenuItem label="Admin Dashboard" isActive={currentPath === '/admin-dashboard'} icon={<PresentationChartBarIcon className='h-5 w-5' />} url='/admin-dashboard'/>
               <MenuItem icon={<UserGroupIcon className="h-5 w-5" />} label="Players" isActive={currentPath === '/players'} url='/players'/>
               <MenuItem icon={<ChartPieIcon className="h-5 w-5" />} label="Tournament Summary" isActive={currentPath === '/tournament-summary'} url='/tournament-summary'/>
-              <MenuItem icon={<UserPlusIcon className="h-5 w-5" />} label="Add Player" isActive={currentPath === 'add-player'} url='/add-player'/>
+              <MenuItem icon={<UserPlusIcon className="h-5 w-5" />} label="Add Player" isActive={currentPath === '/add-player'} url='/add-player'/>
               <MenuItem icon={<PlusCircleIcon className="h-5 w-5" />} label="Create Game" isActive={currentPath === '/create-game'} url='/create-game'/>
             </>
           ) : (

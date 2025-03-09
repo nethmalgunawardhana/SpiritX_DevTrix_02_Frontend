@@ -4,6 +4,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import ProtectedRoute from '../components/ProtectedRoute';
+import React from 'react';
 
 const DashboardPage: React.FC = () => {
 
