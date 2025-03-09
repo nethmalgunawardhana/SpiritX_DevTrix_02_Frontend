@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Prompt } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/context/AuthContext";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${prompt.variable} ${geistSans.variable} antialiased`}
       >
+        <AuthProvider>
         {children}
+        </AuthProvider>
       </body>
     </html>
   );
