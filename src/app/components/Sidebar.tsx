@@ -43,8 +43,8 @@ const MenuItem: React.FC<MenuItemProps> = ({ url, icon, label, notification, isA
 
 export default function Sidebar() {
   const currentPath = usePathname();
-  // const role = 'admin' as 'admin' | 'user';
-  const role = 'user' as 'admin' | 'user';
+  const role = 'admin' as 'admin' | 'user';
+  // const role = 'user' as 'admin' | 'user';
 
   return (
     <div className="w-64 border-r border-zinc-800 flex flex-col">
