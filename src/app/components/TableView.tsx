@@ -67,12 +67,12 @@ export default function PlayersPage() {
     }));
   };
 
-  const handleCloseMenu = () => {
-    setMenuState({
-      ...menuState,
+  const handleCloseMenu = useCallback(() => {
+    setMenuState((prevState) => ({
+      ...prevState,
       visible: false,
-    });
-  };
+    }));
+  }, []);
 
   const handleMenuAction = (action: string) => {
     console.log(`Action ${action} for player ${menuState.playerId}`);
