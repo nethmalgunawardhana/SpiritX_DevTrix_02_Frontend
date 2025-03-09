@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@heroui/modal": "^2.2.13",
+    "@heroui/system": "^2.4.12",
+    "@heroui/theme": "^2.4.12",
     "axios": "^1.8.2",
     "firebase": "^11.4.0",
     "framer-motion": "^12.4.10",
