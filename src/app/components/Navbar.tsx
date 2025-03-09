@@ -29,7 +29,7 @@ export default function Navbar() {
           height={32}
         />
         <div
-          className="flex items-center space-x-2 cursor-pointer relative"
+          className="flex items-center space-x-4 cursor-pointer relative"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
           <div className="text-[1rem] font-medium">

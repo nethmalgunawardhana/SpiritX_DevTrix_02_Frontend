@@ -1,6 +1,6 @@
 "use client"; 
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Table from './Table';
 
 export default function PlayersPage() {
@@ -79,18 +79,18 @@ export default function PlayersPage() {
     handleCloseMenu();
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
+  const handleClickOutside = useCallback((event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
       handleCloseMenu();
     }
-  };
+  }, [menuRef, handleCloseMenu]);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
