@@ -4,32 +4,68 @@ import React, { useState, useRef, useEffect } from "react";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { motion, AnimatePresence } from "framer-motion";
 
-const ChatBot: React.FC = () => {
-  const [messages, setMessages] = useState<{ sender: string; text: string }[]>([
-    { sender: "bot", text: "Hello! I am your AI assistant. How can I help you today?" },
+const ChatBot = () => {
+  const [messages, setMessages] = useState([
+    { sender: "bot", text: "Hello! I am your Cricket AI assistant. How can I help you today?" },
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const suggestions = [
+    "Create the best cricket team",
+    "Tell me about player Virat Kohli",
+    "Who is the best batsman?",
+    "Who is the best bowler?",
+    "Who is the best all-rounder?",
+    "Show me the best players",
+    "Show me all batsmen",
+    "List all bowlers",
+    "Who are the all-rounders?"
+  ];
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const fetchResponse = async (query: string | number | boolean) => {
+    try {
+      setIsTyping(true);
+      const response = await fetch(`http://localhost:5000/chatbot/query/?query=${encodeURIComponent(query)}`);
+      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      
+      const data = await response.json();
+      
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { sender: "bot", text: data.response || "Sorry, I couldn't process that request." },
+      ]);
+    } catch (error) {
+      console.error("Error fetching response:", error);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { sender: "bot", text: "Sorry, there was an error connecting to the server. Please try again later." },
+      ]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
+
   const handleSendMessage = () => {
     if (input.trim()) {
-      setMessages([...messages, { sender: "user", text: input }]);
+      const userMessage = input.trim();
+      setMessages([...messages, { sender: "user", text: userMessage }]);
       setInput("");
-      setIsTyping(true);
-      
-      setTimeout(() => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { sender: "bot", text: "This is a simulated response from the AI." },
-        ]);
-        setIsTyping(false);
-      }, 1500);
+      fetchResponse(userMessage);
     }
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setMessages([...messages, { sender: "user", text: suggestion }]);
+    setInput("");
+    fetchResponse(suggestion);
   };
 
   return (
@@ -91,13 +127,30 @@ const ChatBot: React.FC = () => {
         </div>
       </div>
 
+      {/* Suggestions */}
+      <div className="px-4 pb-2">
+        <div className="max-w-2xl mx-auto">
+          <div className="flex flex-wrap gap-2">
+            {suggestions.map((suggestion, index) => (
+              <button
+                key={index}
+                onClick={() => handleSuggestionClick(suggestion)}
+                className="bg-zinc-700 hover:bg-zinc-600 text-white text-xs px-3 py-1 rounded-full transition-colors"
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Input area */}
-      <div className=" border-gray-700 p-4">
+      <div className="border-gray-700 p-4">
         <div className="max-w-2xl mx-auto">
           <div className="flex items-end rounded-lg border border-gray-700 bg-zinc-800 overflow-hidden focus-within:ring-2 focus-within:ring-teal-500">
             <textarea
               className="flex-1 p-3 max-h-32 focus:outline-none resize-none bg-transparent text-white"
-              placeholder="Ask me anything..."
+              placeholder="Ask me about cricket..."
               rows={1}
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -119,7 +172,7 @@ const ChatBot: React.FC = () => {
             </button>
           </div>
           <p className="text-xs text-center mt-2 text-zinc-500">
-            Spiriter AI Chatbot - Powered by <a href="#" className="underline">DevTrix</a>
+            Cricket AI Chatbot - Powered by <a href="#" className="underline">DevTrix</a>
           </p>
         </div>
       </div>
