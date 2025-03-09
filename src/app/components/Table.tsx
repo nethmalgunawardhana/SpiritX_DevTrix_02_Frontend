@@ -1,7 +1,7 @@
-import React from 'react';
-import { MoreVertical } from 'lucide-react';
-import Link from 'next/link';
-import Img from 'next/image';
+import React, { useState } from "react";
+import { MoreVertical } from "lucide-react";
+import Img from "next/image";
+import PlayerInfoModal from "./PlayerInfoModal";
 
 interface Player {
   id: string;
@@ -17,6 +17,8 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ players, onMenuClick }) => {
+  const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
+
   return (
     <div className="w-[75rem] bg-zinc-900 text-white rounded-lg overflow-hidden border border-zinc-800 ml-4">
       <div className="w-full overflow-x-auto">
@@ -32,38 +34,25 @@ const Table: React.FC<TableProps> = ({ players, onMenuClick }) => {
           </thead>
           <tbody>
             {players.map((player) => (
-              <tr 
-                key={player.id} 
+              <tr
+                key={player.id}
+                onClick={() => setSelectedPlayerId(player.id)} // Opens modal
                 className="border-b bg-zinc-950 border-zinc-800 hover:bg-zinc-900 cursor-pointer duration-75"
               >
                 <td className="py-4 px-6">
-                  <Link href={`/player/${player.id}`} className="block w-full h-full">
-                    <div className="w-10 h-10 rounded-full overflow-hidden">
-                      <Img 
-                        src={player.avatarUrl} 
-                        alt={`${player.name}'s avatar`}
-                        className="w-full h-full object-cover" 
-                        width={40}
-                        height={40}
-                      />
-                    </div>
-                  </Link>
+                  <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <Img
+                      src={player.avatarUrl}
+                      alt={`${player.name}'s avatar`}
+                      className="w-full h-full object-cover"
+                      width={40}
+                      height={40}
+                    />
+                  </div>
                 </td>
-                <td className="py-4 px-6 font-medium">
-                  <Link href={`/player/${player.id}`} className="block w-full h-full">
-                    {player.name}
-                  </Link>
-                </td>
-                <td className="py-4 px-6 text-zinc-300">
-                  <Link href={`/player/${player.id}`} className="block w-full h-full">
-                    {player.university}
-                  </Link>
-                </td>
-                <td className="py-4 px-6 font-medium">
-                  <Link href={`/player/${player.id}`} className="block w-full h-full">
-                    {player.price}
-                  </Link>
-                </td>
+                <td className="py-4 px-6 font-medium">{player.name}</td>
+                <td className="py-4 px-6 text-zinc-300">{player.university}</td>
+                <td className="py-4 px-6 font-medium">{player.price}</td>
                 <td className="py-4 px-6 text-right">
                   <button
                     onClick={(e) => {
@@ -80,6 +69,14 @@ const Table: React.FC<TableProps> = ({ players, onMenuClick }) => {
             ))}
           </tbody>
         </table>
+
+        {/* Player Modal */}
+        {selectedPlayerId && (
+          <PlayerInfoModal
+            selectedPlayerId={selectedPlayerId}
+            onClose={() => setSelectedPlayerId(null)}
+          />
+        )}
       </div>
     </div>
   );

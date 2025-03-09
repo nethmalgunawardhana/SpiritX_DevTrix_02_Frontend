@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import TableView from '../components/TableView';
 import ProtectedRoute from '../components/ProtectedRoute';
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC = () => { 
     return (
         <ProtectedRoute availableFor={['team_owner','admin']} >
         <div className="flex h-screen">
