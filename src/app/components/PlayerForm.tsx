@@ -65,7 +65,7 @@ const PlayerForm: React.FC = () => {
           const players = results.data.map((row:any) => {
             return {
               playerData: {
-                name: row.Name || '', 
+                name: row.Name || '', // Changed from row.name to row.Name
                 category: row.Category || '', 
                 activeStatus: true
               },
