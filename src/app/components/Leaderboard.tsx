@@ -60,8 +60,8 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ users, currentUser }) => {
             transition={{ delay: index * 0.05 }}
             className={`flex items-center p-3 mb-2 rounded-lg ${
               user.username === currentUser 
-                ? 'bg-zinc-800 border border-teal-400' 
-                : 'bg-zinc-800'
+                ? 'bg-zinc-900 border border-teal-400' 
+                : 'bg-zinc-900'
             }`}
           >
             <div className="flex items-center justify-center w-10">
@@ -80,11 +80,11 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ users, currentUser }) => {
                 height={40}
                 className="rounded-full border-2 border-zinc-200 dark:border-zinc-700"
               />
-              {user.rank <= 3 && (
+              {/* {user.rank <= 3 && (
                 <div className={`absolute -top-1 -right-1 w-4 h-4 rounded-full ${
                   user.rank === 1 ? 'bg-yellow-400' : user.rank === 2 ? 'bg-zinc-400' : 'bg-amber-600'
                 } border border-white dark:border-zinc-800`}></div>
-              )}
+              )} */}
             </div>
             
             <div className="ml-4 flex-1">
@@ -95,7 +95,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ users, currentUser }) => {
               </p>
             </div>
             
-            <div className="flex items-center justify-center px-3 py-1 bg-zinc-100 dark:bg-zinc-700 rounded-full">
+            <div className="flex items-center justify-center px-3 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-full">
               <span className="font-bold text-zinc-800 dark:text-zinc-200">{user.points.toLocaleString()}</span>
               <span className="ml-1 text-xs text-zinc-500 dark:text-zinc-400">pts</span>
             </div>
