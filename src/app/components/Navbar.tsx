@@ -19,7 +19,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="h-16 border-b border-zinc-800 flex px-6 justify-end">
+    <header className="h-18 border-b border-zinc-800 flex px-6 justify-end">
       <div className="relative flex items-center space-x-4" ref={dropdownRef}>
         <Img 
           src="/Images/avatar.jpeg" 
