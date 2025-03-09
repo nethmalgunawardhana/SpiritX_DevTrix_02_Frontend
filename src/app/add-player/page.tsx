@@ -6,7 +6,7 @@ import PlayerForm from '../components/PlayerForm';
 
 const AddPlayer: React.FC = () => {
     return (
-      
+        <ProtectedRoute>
         <div className="flex h-screen">
             <Sidebar />
             <div className="flex-1 flex flex-col">
@@ -17,7 +17,7 @@ const AddPlayer: React.FC = () => {
                 </main>
             </div>
         </div>
-      
+        </ProtectedRoute>
     );
 };
 
