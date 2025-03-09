@@ -29,14 +29,14 @@ export default function Navbar() {
           height={32}
         />
         <div
-          className="flex items-center space-x-4 cursor-pointer"
+          className="flex items-center space-x-2 cursor-pointer relative"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
           <div className="text-[1rem] font-medium">
             <div>Nethmal Gunewardana</div>
             <div className="text-[12px] text-gray-400">Current Rank: -</div>
           </div>
-          <div className="w-4 h-4 flex-shrink-0">
+          <div className="relative">
             <ChevronDownIcon
               className="w-4 h-4 text-gray-200 transition-transform duration-200"
               style={{ transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}
