@@ -10,11 +10,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-<<<<<<< HEAD
     "axios": "^1.8.2",
-=======
     "firebase": "^11.4.0",
->>>>>>> 09bf367245382bd4813f4500983a0e1cd7bf9a92
     "framer-motion": "^12.4.10",
     "lucide-react": "^0.479.0",
     "my-next-app": "file:",
