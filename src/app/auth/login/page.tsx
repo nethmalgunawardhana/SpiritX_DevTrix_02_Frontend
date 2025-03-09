@@ -1,11 +1,13 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const auth = useAuth();
+  const route = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,6 +18,13 @@ export default function Login() {
       console.error("Login error:", error);
     }
   };
+
+  useEffect(() => {
+    if (auth?.role) {
+      route.push("/dashboard");
+    }
+  }
+  , []);
 
 
   return (
